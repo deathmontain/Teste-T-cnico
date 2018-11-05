@@ -1,0 +1,83 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" 
+"http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:p="http://primefaces.org/ui">
+
+<h:head>
+</h:head>
+
+<h:body>
+
+	<h:form id="formLancamento">
+
+		<p:outputLabel for="dt_inicial" value="Data Inicial: " />
+		<p:inputText id="dt_inicial"
+			value="#{cadastroLancamento.lancamento.dt_inicial}" />
+
+		<p:outputLabel for="dt_final" value="Data Final: " />
+		<p:inputText id="dt_final"
+			value="#{cadastroLancamento.lancamento.dt_final}" />
+
+		<p:outputLabel for="observacao" value="Observação: " />
+		<p:inputText id="observacao"
+			value="#{cadastroLancamento.lancamento.observacao}" />
+
+		<h:outputLabel for="item" value="Item: " />
+		<p:selectCheckboxMenu id="item"
+		    converter="itemConverter"
+			value="#{cadastroLancamento.lancamento.itens}" label="Itens"
+			multiple="true" filter="true" filterMatchMode="startsWith"
+			panelStyle="width:250px"
+			>
+            <p:ajax event="change" update="vl_total"/>
+			<f:selectItems value="#{cadastroLancamento.itens}" var="item" itemValue="#{item}" itemLabel="#{item.descricao}" />
+		</p:selectCheckboxMenu>
+
+		<p:outputLabel for="vl_total" value="Valor total: " />
+		<p:outputLabel id="vl_total" value="#{cadastroLancamento.lancamento.vl_total}" />
+		
+		<div class="">
+			<p:commandButton action="#{cadastroLancamento.cadastrar}" value="Cadastrar" icon="ui-icon-star" update="formLancamento"/>
+		</div>
+
+
+		<p:dataTable id="lancamentos"
+			value="#{cadastroLancamento.lancamentos}" var="lancamento">
+			<p:column headerText="Id">
+				<h:outputText value="#{lancamento.oid}" />
+			</p:column>
+
+			<p:column headerText="Data Inicio">
+				<h:outputText value="#{lancamento.dt_inicial}" />
+			</p:column>
+
+			<p:column headerText="Data Final">
+				<h:outputText value="#{lancamento.dt_final}" />
+			</p:column>
+
+			<p:column headerText="Observação">
+				<h:outputText value="#{lancamento.observacao}" />
+			</p:column>
+
+			<p:column headerText="Valor Total">
+				<h:outputText value="#{lancamento.vl_total}" />
+			</p:column>
+
+			<p:column headerText="Ações">
+				<p:commandButton update="formLancamento"
+					action="#{cadastroLancamento.excluir(lancamento)}"
+					icon="ui-icon-trash" />
+			</p:column>
+		</p:dataTable>
+
+
+		<p:commandButton action="BemVindo" value="Voltar" icon="ui-icon-star"/>
+		
+	</h:form>
+
+</h:body>
+</html>

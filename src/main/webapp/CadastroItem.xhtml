@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" 
+"http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:p="http://primefaces.org/ui">
+
+<h:head>
+</h:head>
+
+<h:body>
+
+	<h:form>
+		<p:outputLabel for="descricao" value="Descrição do item: " />
+		<p:inputText id="descricao" value="#{cadastroItem.item.descricao}" />
+
+		<p:outputLabel for="valor" value="Valor: " />
+		<p:inputText id="valor" value="#{cadastroItem.item.valor}" />
+
+		<div class="">
+			<p:commandButton action="#{cadastroItem.cadastrar}" value="Cadastrar"
+				icon="ui-icon-star" />
+		</div>
+
+
+
+		<div class="">
+			<p:commandButton action="BemVindo" value="Voltar" icon="ui-icon-star" />
+		</div>
+
+	</h:form>
+
+</h:body>
+</html>
